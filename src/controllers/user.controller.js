@@ -1,5 +1,6 @@
 import { prisma } from "../db.js";
 import bcryptjs from "bcryptjs"
+import jwt from "jsonwebtoken"
 
 const RegisterUserController = async (req, res) => {
   try {
@@ -35,4 +36,28 @@ const RegisterUserController = async (req, res) => {
   }
 };
 
-export { RegisterUserController };
+const LoginUserController = async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) return res.json({message: "Missing required fields"})
+  const user = await prisma.user.findFirst({where: {
+    email: email
+  }})
+
+  if (!user) return res.json({message: "user not found"})
+
+  const isMatch = await bcryptjs.compare(password, user.password)
+  if (!isMatch) {
+    return res.json({message: "Invalid token"})
+  }
+
+  const token = jwt.sign({
+    email: user.email
+  }, process.env.JWT_SECRET, {
+    expiresIn: "1h"
+  })
+
+  return res.json({message: "succesfull", token: token})
+}
+
+export { RegisterUserController, LoginUserController };

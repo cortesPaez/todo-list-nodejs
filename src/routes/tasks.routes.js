@@ -1,16 +1,20 @@
 import { Router } from "express";
-import { CreateTaskController, DeleteTaskController, GetAllTasksController, GetTaskByIdController, UpdateTaskController } from "../controllers/tasks.controller.js";
+import { CompletedTaskController, CreateTaskController, DeleteTaskController, GetAllTasksController, GetTaskByIdController, UpdateTaskController } from "../controllers/tasks.controller.js";
+import { verifyToken } from "../middlewares/jwt.middleware.js";
 
 const router = Router();
 
-router.get("/tasks", GetAllTasksController)
+router.get("/tasks", verifyToken, GetAllTasksController)
 
-router.get("/tasks/:id", GetTaskByIdController)
+router.get("/tasks/:id", verifyToken, GetTaskByIdController)
 
-router.post("/tasks", CreateTaskController)
+router.post("/tasks", verifyToken, CreateTaskController)
 
-router.delete("/tasks/:id", DeleteTaskController)
+router.delete("/tasks/:id", verifyToken, DeleteTaskController)
 
-router.put("/tasks/:id", UpdateTaskController)
+router.put("/tasks/:id", verifyToken, UpdateTaskController)
+
+router.patch("/tasks/:id/completed", verifyToken, CompletedTaskController)
+
 
 export default router
