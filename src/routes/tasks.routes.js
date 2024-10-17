@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { prisma } from "../db.js"
 import { CreateTaskController, DeleteTaskController, GetAllTasksController, GetTaskByIdController, UpdateTaskController } from "../controllers/tasks.controller.js";
 
 const router = Router();
