@@ -8,6 +8,7 @@ Instrucciones para poder levantar el proyecto
     <li>Instalar nodejs</li>
     <li>Instalar los modulos de node</li>
     <li>Ejecutar migraciones</li>
+    <li>Levantar el proyecto</li>
 </ul>
 
 Instalar modulos de node
