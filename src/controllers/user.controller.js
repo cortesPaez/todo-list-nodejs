@@ -26,7 +26,7 @@ const RegisterUserController = async (req, res) => {
       data: { email, password: hashedPassword },
     });
 
-    return res.json(newUser);
+    return res.json({message: "successful", email: newUser.email});
   } catch (error) {
     console.error(error);
     res.status(500).json({
@@ -64,7 +64,7 @@ const LoginUserController = async (req, res) => {
       }
     );
 
-    return res.status(200).json({ message: "succesfull", token: token });
+    return res.status(200).json({ message: "successful", token: token });
   } catch (error) {
     console.error(error)
     return res.status(500).json({ message: "server with problems", token: token });
