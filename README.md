@@ -10,10 +10,17 @@ Instrucciones para poder levantar el proyecto
     <li>Ejecutar migraciones</li>
 </ul>
 
+Instalar modulos de node
 ```bash
-#install modules
 npm i
+```
 
-#run project
+Ejecutar las migraciones
+```bash
+npx prisma migrate dev
+```
+
+Ejecutar servidor en el puerto 3000
+```bash
 npm run dev
 ```
